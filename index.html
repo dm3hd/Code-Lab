@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مختبر الشفرات</title>
+<meta name="author" content="طه (Taha)">
+<meta name="copyright" content="© 2026 طه (Taha). جميع الحقوق محفوظة">
+<!-- © 2026 طه (Taha). All rights reserved. Original work: Codelab (مختبر الشفرات). -->
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#14213d;--mut:#5b6785;--ac:#2563eb;--ac2:#e8efff;--bd:#d9dfee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d1220;--card:#161d30;--tx:#e8ecf8;--mut:#93a0c4;--ac:#5b8cff;--ac2:#1d2845;--bd:#26304d}}
+:root[data-theme=dark]{--bg:#0d1220;--card:#161d30;--tx:#e8ecf8;--mut:#93a0c4;--ac:#5b8cff;--ac2:#1d2845;--bd:#26304d}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.7 Cairo,Tahoma,"Segoe UI",sans-serif}
+header{padding:18px 16px 6px;text-align:center}h1{margin:0;font-size:22px}header p{margin:4px 0 0;color:var(--mut);font-size:14px}
+nav{display:flex;gap:6px;padding:10px 12px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
+nav button{flex:1;padding:10px 4px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:700;cursor:pointer}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:760px;margin:auto;padding:0 12px 40px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin:12px 0}
+h2{margin:0 0 8px;font-size:18px}p{margin:6px 0}.mut{color:var(--mut);font-size:14px}
+textarea,input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+textarea{min-height:70px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.row>*{flex:1;min-width:110px}
+button.b{padding:10px 12px;border:0;border-radius:10px;background:var(--ac);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+button.b.s{background:var(--ac2);color:var(--ac)}
+.out{direction:ltr;text-align:left;background:var(--bg);border:1px dashed var(--bd);border-radius:10px;padding:10px;min-height:44px;word-break:break-all;font-family:ui-monospace,Menlo,monospace;white-space:pre-wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}
+.chip{display:flex;flex-direction:column;align-items:center;padding:6px 2px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:10px;font:inherit;cursor:pointer}
+.chip b{font-size:18px}.chip span{font-size:11px;color:var(--ac);letter-spacing:1px;direction:ltr}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.opts button{padding:12px;font-size:20px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);cursor:pointer}
+.ok{background:#16a34a!important;color:#fff!important}.no{background:#dc2626!important;color:#fff!important}
+#key{width:100%;padding:26px;font-size:18px;border:0;border-radius:14px;background:var(--ac);color:#fff;font-weight:700;touch-action:none;user-select:none;-webkit-user-select:none}
+canvas{max-width:100%;border-radius:8px;image-rendering:pixelated;background:#000;display:block}
+.cw{overflow-x:auto}
+details{border-top:1px solid var(--bd);padding:8px 0}summary{cursor:pointer;font-weight:700}
+audio{width:100%;margin-top:8px}
+</style>
+</head>
+<body>
+<header><select id="ul" style="width:auto;padding:6px 10px;margin-bottom:6px"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="ru">Русский</option><option value="tr">Türkçe</option></select><h1>🔐 مختبر الشفرات</h1><p>تعلّم وحوّل: مورس • المخطط الطيفي • التشفير</p></header>
+<nav><button class="on" data-t="m">مورس</button><button data-t="s">المخطط الطيفي</button><button data-t="c">التشفير</button></nav>
+<main>
+
+<section id="m" class="on">
+<div class="card"><h2>📖 تعلّم مورس</h2>
+<p class="mut">شفرة مورس تمثّل كل حرف بنقاط (قصيرة) وشرطات (طويلة = 3 نقاط). اضغط على أي حرف لتسمعه.</p>
+<select id="lang"><option value="lat">الحروف اللاتينية والأرقام</option><option value="ar">الحروف العربية والأرقام</option><option value="ru">الحروف الروسية والأرقام</option><option value="tr">الحروف التركية والأرقام</option></select>
+<div class="grid" id="mg" style="margin-top:8px"></div></div>
+
+<div class="card"><h2>🎯 اختبر نفسك</h2>
+<div class="row"><div class="out" id="qc" style="font-size:26px;text-align:center"></div><button class="b s" id="qp">🔊 اسمع</button></div>
+<div class="opts" id="qo"></div></div>
+
+<div class="card"><h2>✍️ كتابة ← مورس</h2>
+<textarea id="t2m" placeholder="اكتب نصًا..."></textarea>
+<div class="out" id="t2mo"></div>
+<div class="row"><button class="b" id="pl">▶ تشغيل الصوت</button><button class="b s" data-cp="t2mo">نسخ</button></div></div>
+
+<div class="card"><h2>🔤 مورس ← كتابة</h2>
+<textarea id="m2t" dir="ltr" placeholder=".... . .-.. .-.. --- / .-- --- .-. .-.. -.."></textarea>
+<p class="mut">افصل بين الحروف بمسافة وبين الكلمات بـ / </p>
+<div class="out" id="m2to"></div></div>
+
+<div class="card"><h2>⌨️ اكتب بالمفتاح</h2>
+<p class="mut">اضغط على المفتاح: ضغطة قصيرة = نقطة، طويلة = شرطة. التوقف يفصل الحرف تلقائيًا.</p>
+<button id="key">اضغط هنا</button>
+<div class="row"><button class="b s" id="kd">● نقطة</button><button class="b s" id="kh">▬ شرطة</button><button class="b s" id="kl">فاصل حرف</button><button class="b s" id="kw">فاصل كلمة</button><button class="b s" id="kb">⌫ حذف</button><button class="b s" id="kc">مسح</button></div>
+<div class="out" id="mi"></div><div class="out" id="mo" dir="auto" style="margin-top:6px"></div></div>
+</section>
+
+<section id="s">
+<div class="card"><h2>📖 ما هو المخطط الطيفي؟</h2>
+<p>المخطط الطيفي (Spectrogram) صورة تُظهر كيف تتغير ترددات الصوت مع الزمن: المحور الأفقي هو الزمن، والعمودي هو التردد، وشدة اللون هي قوة الإشارة. يُحسب بتحويل فورييه القصير (STFT) على نوافذ زمنية متتابعة.</p>
+<p>الحيلة: إذا صنعنا صوتًا تُشكّل ترددات أزمنته صورة أو كتابة، ظهرت الكلمة عند فتح الصوت في أي برنامج مخططات طيفية. تُستخدم هذه الفكرة في الألغاز والإخفاء الصوتي.</p>
+<p class="mut">هنا كل حرف يُرسم كشبكة 5×7؛ كل صف من الشبكة تردد (800 – 3200 هرتز) وكل عمود 60 مللي ثانية. تدعم الحروف اللاتينية والأرقام.</p></div>
+
+<div class="card"><h2>✍️ كتابة ← مخطط طيفي</h2>
+<input id="st" dir="ltr" value="HELLO" maxlength="24" placeholder="Text">
+<div class="row"><button class="b" id="sg">توليد</button><button class="b s" id="sd">فك المخطط المعروض</button></div>
+<div class="cw"><canvas id="cv" width="10" height="70"></canvas></div>
+<audio id="au" controls></audio>
+<div class="row"><a id="dw" download="spectrogram.wav"><button class="b s" style="width:100%">⬇ حفظ الصوت WAV</button></a><a id="di" download="spectrogram.png"><button class="b s" style="width:100%">⬇ حفظ الصورة PNG</button></a></div></div>
+
+<div class="card"><h2>🖼️ مخطط طيفي ← كتابة</h2>
+<p class="mut">ارفع صورة أو ملف صوت (WAV/MP3) أنشأه هذا التطبيق لاستخراج النص.</p>
+<input type="file" id="sf" accept="image/*,audio/*">
+<div class="out" id="so" dir="auto" style="margin-top:8px"></div></div>
+</section>
+
+<section id="c">
+<div class="card"><h2>🔁 تشفير وفك تشفير</h2>
+<select id="cs"></select>
+<input id="cp" placeholder="المفتاح" style="margin-top:8px">
+<textarea id="ci" dir="auto" placeholder="اكتب النص هنا..." style="margin-top:8px"></textarea>
+<div class="row"><button class="b" id="ce">تشفير ⬇</button><button class="b s" id="cd">فك التشفير ⬇</button></div>
+<div class="out" id="co" dir="auto"></div>
+<div class="row"><button class="b s" data-cp="co">نسخ</button></div>
+<p class="mut" id="cinf"></p></div>
+<div class="card"><h2>📖 تعلّم أشهر تقنيات التشفير</h2><div id="cl"></div></div>
+</section>
+</main>
+<footer style="text-align:center;padding:16px 12px 28px;color:var(--mut);font-size:13px">© 2026 صُنع بواسطة <b>طه</b> (Taha) · جميع الحقوق محفوظة<br>يُمنع نسخ التطبيق أو إعادة نشره باسم آخر</footer>
+
+<script>
+const $=i=>document.getElementById(i);
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,section').forEach(e=>e.classList.remove('on'));b.classList.add('on');$(b.dataset.t).classList.add('on')});
+const copyTxt=async t=>{try{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;top:0;opacity:0';document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);const ok=document.execCommand('copy');a.remove();if(ok)return true}catch(e){}try{await navigator.clipboard.writeText(t);return true}catch(e){return false}};
+document.querySelectorAll('[data-cp]').forEach(b=>b.onclick=async()=>{const n=b.firstChild,ok=await copyTxt($(b.dataset.cp).textContent);n.__a=ok?'تم ✓':'تعذّر النسخ';apply();setTimeout(()=>{n.__a='نسخ';apply()},1200)});
+let ctx;const AC=()=>ctx||(ctx=new (window.AudioContext||window.webkitAudioContext)());
+
+/* ---------- i18n ---------- */
+const LG=['ar','en','fr','es','ru','tr'];let L='';try{L=localStorage.getItem('lg')||''}catch(e){}
+if(!LG.includes(L)){const n=(navigator.language||'en').slice(0,2);L=LG.includes(n)?n:'en'}
+const D={};`🔐 مختبر الشفرات=🔐 Cipher Lab|🔐 Labo des codes|🔐 Laboratorio de códigos|🔐 Лаборатория шифров|🔐 Şifre Laboratuvarı
+مختبر الشفرات=Cipher Lab|Labo des codes|Laboratorio de códigos|Лаборатория шифров|Şifre Laboratuvarı
+تعلّم وحوّل:=Learn and convert: Morse • Spectrogram • Ciphers|Apprenez et convertissez : Morse • Spectrogramme • Chiffrements|Aprende y convierte: Morse • Espectrograma • Cifrados|Учитесь и конвертируйте: Морзе • Спектрограмма • Шифры|Öğren ve dönüştür: Mors • Spektrogram • Şifreleme
+مورس=Morse|Morse|Morse|Морзе|Mors
+المخطط الطيفي=Spectrogram|Spectrogramme|Espectrograma|Спектрограмма|Spektrogram
+التشفير=Ciphers|Chiffrement|Cifrado|Шифрование|Şifreleme
+📖 تعلّم مورس=📖 Learn Morse|📖 Apprendre le Morse|📖 Aprende Morse|📖 Изучаем Морзе|📖 Mors öğren
+شفرة مورس تمثّل=Morse code represents each character with dots (short) and dashes (long = 3 dots). Tap any character to hear it.|Le Morse représente chaque caractère par des points (courts) et des traits (longs = 3 points). Touchez un caractère pour l’écouter.|El Morse representa cada carácter con puntos (cortos) y rayas (largas = 3 puntos). Toca un carácter para oírlo.|Азбука Морзе кодирует символы точками (короткими) и тире (длинными = 3 точки). Нажмите на символ, чтобы услышать его.|Mors, her karakteri noktalar (kısa) ve çizgilerle (uzun = 3 nokta) gösterir. Duymak için bir karaktere dokun.
+الحروف اللاتينية والأرقام=Latin letters and digits|Lettres latines et chiffres|Letras latinas y dígitos|Латинские буквы и цифры|Latin harfleri ve rakamlar
+الحروف العربية والأرقام=Arabic letters and digits|Lettres arabes et chiffres|Letras árabes y dígitos|Арабские буквы и цифры|Arap harfleri ve rakamlar
+الحروف الروسية والأرقام=Russian letters and digits|Lettres russes et chiffres|Letras rusas y dígitos|Русские буквы и цифры|Rus harfleri ve rakamlar
+الحروف التركية والأرقام=Turkish letters and digits|Lettres turques et chiffres|Letras turcas y dígitos|Турецкие буквы и цифры|Türk harfleri ve rakamlar
+تعذّر النسخ=Copy failed|Échec de la copie|No se pudo copiar|Не удалось скопировать|Kopyalanamadı
+🎯 اختبر نفسك=🎯 Test yourself|🎯 Testez-vous|🎯 Ponte a prueba|🎯 Проверьте себя|🎯 Kendini sına
+🔊 اسمع=🔊 Listen|🔊 Écouter|🔊 Escuchar|🔊 Слушать|🔊 Dinle
+✍️ كتابة ← مورس=✍️ Text → Morse|✍️ Texte → Morse|✍️ Texto → Morse|✍️ Текст → Морзе|✍️ Metin → Mors
+▶ تشغيل الصوت=▶ Play sound|▶ Lire le son|▶ Reproducir sonido|▶ Воспроизвести звук|▶ Sesi çal
+نسخ=Copy|Copier|Copiar|Копировать|Kopyala
+🔤 مورس ← كتابة=🔤 Morse → Text|🔤 Morse → Texte|🔤 Morse → Texto|🔤 Морзе → Текст|🔤 Mors → Metin
+افصل بين الحروف=Separate letters with a space and words with /|Séparez les lettres par un espace et les mots par /|Separa las letras con un espacio y las palabras con /|Разделяйте буквы пробелом, а слова — знаком /|Harfleri boşlukla, kelimeleri / ile ayırın
+⌨️ اكتب بالمفتاح=⌨️ Type with the key|⌨️ Écrire avec la touche|⌨️ Escribe con la tecla|⌨️ Ввод ключом|⌨️ Anahtarla yaz
+اضغط على المفتاح:=Tap the key: a short press = dot, a long press = dash. A pause separates letters automatically.|Appuyez sur la touche : appui court = point, long = trait. Une pause sépare les lettres automatiquement.|Pulsa la tecla: pulsación corta = punto, larga = raya. Una pausa separa las letras automáticamente.|Нажимайте на кнопку: короткое нажатие — точка, долгое — тире. Пауза автоматически разделяет буквы.|Tuşa bas: kısa basış = nokta, uzun basış = çizgi. Duraklama harfleri otomatik ayırır.
+اضغط هنا=Press here|Appuyez ici|Pulsa aquí|Нажмите здесь|Buraya bas
+● نقطة=● Dot|● Point|● Punto|● Точка|● Nokta
+▬ شرطة=▬ Dash|▬ Trait|▬ Raya|▬ Тире|▬ Çizgi
+فاصل حرف=Letter space|Espace lettre|Espacio letra|Между буквами|Harf aralığı
+فاصل كلمة=Word space|Espace mot|Espacio palabra|Между словами|Kelime aralığı
+⌫ حذف=⌫ Delete|⌫ Effacer|⌫ Borrar|⌫ Удалить|⌫ Sil
+مسح=Clear|Vider|Limpiar|Очистить|Temizle
+📖 ما هو المخطط الطيفي؟=📖 What is a spectrogram?|📖 Qu’est-ce qu’un spectrogramme ?|📖 ¿Qué es un espectrograma?|📖 Что такое спектрограмма?|📖 Spektrogram nedir?
+المخطط الطيفي (Spectrogram) صورة=A spectrogram is an image showing how sound frequencies change over time: time on the horizontal axis, frequency on the vertical axis, and color intensity showing signal strength. It is computed with the short-time Fourier transform (STFT).|Un spectrogramme est une image montrant l’évolution des fréquences sonores dans le temps : temps en abscisse, fréquence en ordonnée, intensité de la couleur = force du signal. Il est calculé par la transformée de Fourier à court terme (STFT).|Un espectrograma es una imagen que muestra cómo cambian las frecuencias del sonido con el tiempo: tiempo en el eje horizontal, frecuencia en el vertical y la intensidad del color indica la fuerza de la señal. Se calcula con la transformada de Fourier de tiempo corto (STFT).|Спектрограмма — это изображение, показывающее изменение частот звука во времени: по горизонтали время, по вертикали частота, яркость цвета — сила сигнала. Вычисляется кратковременным преобразованием Фурье (STFT).|Spektrogram, ses frekanslarının zamanla değişimini gösteren bir görüntüdür: yatay eksen zaman, dikey eksen frekans, renk yoğunluğu sinyal gücüdür. Kısa zamanlı Fourier dönüşümü (STFT) ile hesaplanır.
+الحيلة: إذا=The trick: if we make a sound whose frequencies over time draw an image or text, the word appears when the sound is opened in any spectrogram viewer. Used in puzzles and audio hiding.|L’astuce : si l’on crée un son dont les fréquences dessinent un texte ou une image, le mot apparaît quand on l’ouvre dans un visualiseur de spectrogramme. Utilisé dans les énigmes et la dissimulation audio.|El truco: si creamos un sonido cuyas frecuencias dibujen un texto o una imagen, la palabra aparece al abrirlo en cualquier visor de espectrogramas. Se usa en acertijos y para ocultar información en audio.|Хитрость: если создать звук, частоты которого рисуют текст или картинку, слово появится при открытии в любом просмотрщике спектрограмм. Используется в головоломках и для скрытия данных в аудио.|Püf noktası: frekansları zamanla bir yazı ya da resim çizen bir ses üretirsek, kelime herhangi bir spektrogram görüntüleyicide ortaya çıkar. Bulmacalarda ve ses gizlemede kullanılır.
+هنا كل حرف=Here each character is drawn as a 5×7 grid: each row is a frequency (800–3200 Hz) and each column lasts 60 ms. Latin letters and digits are supported.|Ici chaque caractère est dessiné dans une grille 5×7 : chaque ligne est une fréquence (800–3200 Hz) et chaque colonne dure 60 ms. Lettres latines et chiffres pris en charge.|Aquí cada carácter se dibuja en una cuadrícula 5×7: cada fila es una frecuencia (800–3200 Hz) y cada columna dura 60 ms. Admite letras latinas y dígitos.|Здесь каждый символ рисуется сеткой 5×7: строка — частота (800–3200 Гц), столбец длится 60 мс. Поддерживаются латинские буквы и цифры.|Burada her karakter 5×7 ızgarayla çizilir: her satır bir frekans (800–3200 Hz), her sütun 60 ms sürer. Latin harfleri ve rakamlar desteklenir.
+✍️ كتابة ← مخطط طيفي=✍️ Text → Spectrogram|✍️ Texte → Spectrogramme|✍️ Texto → Espectrograma|✍️ Текст → Спектрограмма|✍️ Metin → Spektrogram
+توليد=Generate|Générer|Generar|Создать|Oluştur
+فك المخطط المعروض=Decode displayed spectrogram|Décoder le spectrogramme affiché|Decodificar el espectrograma mostrado|Расшифровать показанную спектрограмму|Gösterilen spektrogramı çöz
+⬇ حفظ الصوت WAV=⬇ Save audio (WAV)|⬇ Enregistrer l’audio (WAV)|⬇ Guardar audio (WAV)|⬇ Сохранить аудио (WAV)|⬇ Sesi kaydet (WAV)
+⬇ حفظ الصورة PNG=⬇ Save image (PNG)|⬇ Enregistrer l’image (PNG)|⬇ Guardar imagen (PNG)|⬇ Сохранить изображение (PNG)|⬇ Görseli kaydet (PNG)
+🖼️ مخطط طيفي ← كتابة=🖼️ Spectrogram → Text|🖼️ Spectrogramme → Texte|🖼️ Espectrograma → Texto|🖼️ Спектрограмма → Текст|🖼️ Spektrogram → Metin
+ارفع صورة أو ملف صوت=Upload an image or audio file (WAV/MP3) created by this app to extract the text.|Importez une image ou un fichier audio (WAV/MP3) créé par cette application pour extraire le texte.|Sube una imagen o un archivo de audio (WAV/MP3) creado por esta app para extraer el texto.|Загрузите изображение или аудиофайл (WAV/MP3), созданный этим приложением, чтобы извлечь текст.|Metni çıkarmak için bu uygulamanın oluşturduğu bir görsel veya ses dosyası (WAV/MP3) yükleyin.
+تعذّرت القراءة=Could not read the file|Lecture impossible|No se pudo leer el archivo|Не удалось прочитать файл|Dosya okunamadı
+🔁 تشفير وفك تشفير=🔁 Encrypt and decrypt|🔁 Chiffrer et déchiffrer|🔁 Cifrar y descifrar|🔁 Шифрование и расшифровка|🔁 Şifrele ve çöz
+اكتب نصًا...=Type some text...|Saisissez un texte...|Escribe un texto...|Введите текст...|Metin yazın...
+اكتب النص هنا...=Type your text here...|Saisissez votre texte ici...|Escribe tu texto aquí...|Введите текст здесь...|Metninizi buraya yazın...
+تشفير ⬇=Encrypt ⬇|Chiffrer ⬇|Cifrar ⬇|Зашифровать ⬇|Şifrele ⬇
+فك التشفير ⬇=Decrypt ⬇|Déchiffrer ⬇|Descifrar ⬇|Расшифровать ⬇|Şifreyi çöz ⬇
+📖 تعلّم أشهر تقنيات التشفير=📖 Learn famous ciphers|📖 Apprenez les chiffrements célèbres|📖 Aprende los cifrados famosos|📖 Известные шифры|📖 Ünlü şifreleri öğren
+تم ✓=Done ✓|Fait ✓|Hecho ✓|Готово ✓|Tamam ✓
+© 2026 صُنع بواسطة=© 2026 Made by|© 2026 Créé par|© 2026 Creado por|© 2026 Автор:|© 2026 Yapımcı:
+طه=Taha|Taha|Taha|Таха|Taha
+(Taha) ·=· All rights reserved|· Tous droits réservés|· Todos los derechos reservados|· Все права защищены|· Tüm hakları saklıdır
+يُمنع نسخ التطبيق=Copying or republishing this app under another name is prohibited|La copie ou la republication de cette application sous un autre nom est interdite|Se prohíbe copiar o republicar esta aplicación con otro nombre|Копирование и публикация приложения под другим именем запрещены|Uygulamayı kopyalamak veya başka adla yeniden yayınlamak yasaktır
+شيفرة قيصر=Caesar cipher|Chiffre de César|Cifrado César|Шифр Цезаря|Sezar şifresi
+فيجنير=Vigenère|Vigenère|Vigenère|Виженер|Vigenère
+سياج السكك (Rail Fence)=Rail Fence|Rail Fence (clôture)|Rail Fence (valla)|Rail Fence (изгородь)|Rail Fence (ray çiti)
+سداسي عشري (Hex)=Hexadecimal (Hex)|Hexadécimal (Hex)|Hexadecimal (Hex)|Шестнадцатеричный (Hex)|Onaltılık (Hex)
+ثنائي (Binary)=Binary|Binaire|Binario|Двоичный|İkili
+الإزاحة (رقم)=Shift (number)|Décalage (nombre)|Desplazamiento (número)|Сдвиг (число)|Kaydırma (sayı)
+الكلمة المفتاحية (حروف لاتينية)=Keyword (Latin letters)|Mot-clé (lettres latines)|Palabra clave (letras latinas)|Ключевое слово (латиница)|Anahtar kelime (Latin harfleri)
+عدد الصفوف (رقم)=Number of rails (number)|Nombre de rails (nombre)|Número de filas (número)|Число рядов (число)|Satır sayısı (sayı)
+استخدمها يوليوس قيصر=Used by Julius Caesar: each letter is shifted a fixed number of places in the alphabet. With shift 3, A becomes D. Very weak: only 25 keys, easily broken by trial.|Utilisé par Jules César : chaque lettre est décalée d’un nombre fixe de places. Avec un décalage de 3, A devient D. Très faible : seulement 25 clés.|Usado por Julio César: cada letra se desplaza un número fijo de posiciones. Con desplazamiento 3, A pasa a D. Muy débil: solo 25 claves.|Применял Юлий Цезарь: каждая буква сдвигается на фиксированное число позиций. При сдвиге 3 A становится D. Очень слабый: всего 25 ключей.|Julius Caesar kullandı: her harf alfabede sabit sayıda kaydırılır. 3 kaydırmada A, D olur. Çok zayıf: yalnızca 25 anahtar var.
+قيصر بإزاحة 13=Caesar with a fixed shift of 13; the alphabet has 26 letters, so encrypting and decrypting are the same operation. Used to hide puzzle answers, not for security.|César avec un décalage fixe de 13 ; l’alphabet ayant 26 lettres, chiffrer et déchiffrer sont la même opération. Sert à masquer des solutions, pas à protéger.|César con desplazamiento fijo de 13; como el alfabeto tiene 26 letras, cifrar y descifrar es lo mismo. Sirve para ocultar soluciones, no para proteger.|Цезарь со сдвигом 13; в алфавите 26 букв, поэтому шифрование и расшифровка — одна операция. Скрывает ответы в головоломках, но не защищает.|13 sabit kaydırmalı Sezar; alfabe 26 harf olduğundan şifreleme ve çözme aynı işlemdir. Bulmaca cevaplarını gizler, güvenlik sağlamaz.
+شيفرة عبرية قديمة=An ancient Hebrew cipher that mirrors the alphabet: A↔Z, B↔Y, and so on. No key; encrypting and decrypting are the same.|Un ancien chiffre hébreu qui inverse l’alphabet : A↔Z, B↔Y, etc. Sans clé ; chiffrer et déchiffrer sont identiques.|Un antiguo cifrado hebreo que invierte el alfabeto: A↔Z, B↔Y, etc. Sin clave; cifrar y descifrar es lo mismo.|Древний еврейский шифр, зеркально переворачивающий алфавит: A↔Z, B↔Y и т. д. Без ключа; шифрование и расшифровка совпадают.|Alfabeyi tersine çeviren eski bir İbrani şifresi: A↔Z, B↔Y vb. Anahtarı yoktur; şifreleme ve çözme aynıdır.
+تستخدم كلمة سرية=Uses a secret word repeated over the text; each letter is shifted by the matching key letter. Called unbreakable for centuries, but broken by frequency analysis (Kasiski).|Utilise un mot secret répété sur le texte ; chaque lettre est décalée selon la lettre de clé correspondante. Réputé indéchiffrable pendant des siècles, mais cassé par l’analyse des fréquences (Kasiski).|Usa una palabra secreta repetida sobre el texto; cada letra se desplaza según la letra de la clave. Se creyó indescifrable durante siglos, pero cae con el análisis de frecuencias (Kasiski).|Использует секретное слово, повторяемое над текстом; каждая буква сдвигается на соответствующую букву ключа. Веками считался нерушимым, но взламывается частотным анализом (Касиски).|Metnin üstünde tekrarlanan gizli bir sözcük kullanır; her harf ilgili anahtar harfi kadar kaydırılır. Yüzyıllarca kırılamaz sayıldı ama frekans analiziyle (Kasiski) kırılır.
+شيفرة تبديل=A transposition cipher: the text is written in a zigzag over several rails, then the rails are read in order. It changes the order of letters, not the letters.|Un chiffre de transposition : le texte s’écrit en zigzag sur plusieurs rails puis se lit rail par rail. Il change l’ordre des lettres, pas les lettres.|Un cifrado de transposición: el texto se escribe en zigzag sobre varias filas y luego se lee fila por fila. Cambia el orden de las letras, no las letras.|Шифр перестановки: текст записывается зигзагом по нескольким рядам, затем читается ряд за рядом. Меняется порядок букв, а не сами буквы.|Bir yer değiştirme şifresi: metin birkaç satıra zikzak yazılır, sonra satırlar sırayla okunur. Harflerin sırasını değiştirir, harfleri değil.
+ليس تشفيرًا سريًا=Not secret encryption but an encoding that turns data into 64 text symbols for email and the web. Supports Arabic. Anyone can decode it.|Ce n’est pas un chiffrement secret mais un encodage qui transforme les données en 64 symboles texte pour le courriel et le web. Gère l’arabe. N’importe qui peut le décoder.|No es cifrado secreto sino una codificación que convierte datos en 64 símbolos de texto para correo y web. Admite árabe. Cualquiera puede decodificarlo.|Это не секретное шифрование, а кодировка, превращающая данные в 64 текстовых символа для почты и веба. Поддерживает арабский. Расшифровать может любой.|Gizli bir şifreleme değil; verileri e-posta ve web için 64 metin simgesine çeviren bir kodlamadır. Arapçayı destekler. Herkes çözebilir.
+يمثّل كل بايت=Represents each byte with two hexadecimal digits (0-9, A-F). Common in programming and file analysis.|Représente chaque octet par deux chiffres hexadécimaux (0-9, A-F). Courant en programmation et en analyse de fichiers.|Representa cada byte con dos dígitos hexadecimales (0-9, A-F). Común en programación y análisis de archivos.|Представляет каждый байт двумя шестнадцатеричными цифрами (0-9, A-F). Распространён в программировании и анализе файлов.|Her baytı iki onaltılık rakamla (0-9, A-F) gösterir. Programlamada ve dosya analizinde yaygındır.
+لغة الحاسوب الأصلية=The computer’s native language: each byte is 8 bits of 0 and 1. Example: the letter A is 01000001.|La langue native de l’ordinateur : chaque octet est 8 bits de 0 et de 1. Exemple : la lettre A vaut 01000001.|El lenguaje nativo del ordenador: cada byte son 8 bits de 0 y 1. Ejemplo: la letra A es 01000001.|Родной язык компьютера: каждый байт — 8 бит из 0 и 1. Пример: буква A — 01000001.|Bilgisayarın ana dili: her bayt 0 ve 1’lerden oluşan 8 bittir. Örnek: A harfi 01000001’dir.
+ترميز بنقاط وشرطات=Encoding with dots and dashes (see the Morse tab for details).|Encodage par points et traits (voir l’onglet Morse).|Codificación con puntos y rayas (ver la pestaña Morse).|Кодирование точками и тире (см. вкладку «Морзе»).|Nokta ve çizgilerle kodlama (ayrıntılar için Mors sekmesine bakın).
+أدخل مفتاحًا لاتينيًا=Enter a Latin keyword|Saisissez un mot-clé latin|Introduce una palabra clave latina|Введите ключ латиницей|Latin harflerle bir anahtar girin
+نص Base64 غير صالح=Invalid Base64 text|Texte Base64 invalide|Texto Base64 no válido|Недопустимый текст Base64|Geçersiz Base64 metni
+غير صالح=Invalid input|Entrée invalide|Entrada no válida|Недопустимые данные|Geçersiz giriş`.split('\n').forEach(l=>{const i=l.indexOf('=');if(i>0)D[l.slice(0,i).trim()]=l.slice(i+1).split('|').map(x=>x.trim())});
+const DK=Object.keys(D).sort((a,b)=>b.length-a.length);
+const tr=s=>{if(L=='ar'||!s)return s;const t=s.trim(),i=LG.indexOf(L)-1;if(D[t])return D[t][i]||s;const k=DK.find(k=>k.length>=8&&t.startsWith(k));return k?D[k][i]||s:s};
+const trx=s=>L=='ar'||!D[s]?s:D[s][LG.indexOf(L)-1]||s;
+function apply(){document.documentElement.lang=L;document.documentElement.dir=L=='ar'?'rtl':'ltr';
+ const w=document.createTreeWalker(document.body,4),ns=[];while(w.nextNode())ns.push(w.currentNode);
+ ns.forEach(n=>{if(n.parentElement.closest('.out,#qo,.chip,#cs,#cl,#cinf,script'))return;if(n.__a===undefined)n.__a=n.nodeValue;const c=n.__a.trim();if(c)n.nodeValue=n.__a.replace(c,()=>tr(c))});
+ ['t2m','ci'].forEach(i=>{const e=$(i);if(!e.__p)e.__p=e.placeholder;e.placeholder=tr(e.__p)});
+ document.title=tr('مختبر الشفرات')}
+function setLang(){apply();buildC();$('ul').value=L}
+/* ---------- Morse ---------- */
+const P=s=>Object.fromEntries(s.split('|').map(x=>x.split(' ')));
+const LAT=P("A .-|B -...|C -.-.|D -..|E .|F ..-.|G --.|H ....|I ..|J .---|K -.-|L .-..|M --|N -.|O ---|P .--.|Q --.-|R .-.|S ...|T -|U ..-|V ...-|W .--|X -..-|Y -.--|Z --..");
+const NUM=P("0 -----|1 .----|2 ..---|3 ...--|4 ....-|5 .....|6 -....|7 --...|8 ---..|9 ----.|. .-.-.-|, --..--|? ..--..|/ -..-.|= -...-");
+const ARB=P("ا .-|ب -...|ت -|ث -.-.|ج .---|ح ....|خ ---|د -..|ذ --..|ر .-.|ز ---.|س ...|ش ----|ص -..-|ض ...-|ط ..-|ظ -.--|ع .-.-|غ --.|ف ..-.|ق --.-|ك -.-|ل .-..|م --|ن -.|ه ..-..|و .--|ي ..");
+const RUS=P("А .-|Б -...|В .--|Г --.|Д -..|Е .|Ж ...-|З --..|И ..|Й .---|К -.-|Л .-..|М --|Н -.|О ---|П .--.|Р .-.|С ...|Т -|У ..-|Ф ..-.|Х ....|Ц -.-.|Ч ---.|Ш ----|Щ --.-|Ъ --.--|Ы -.--|Ь -..-|Э ..-..|Ю ..--|Я .-.-");
+const TUR=P("Ç -.-..|Ğ --.-.|İ .-..-|Ö ---.|Ş .--..|Ü ..--");
+const FW={...LAT,...NUM,...ARB,...RUS,...TUR,'Ё':'.'};
+let lang='lat';
+const TB={lat:{...LAT,...NUM},ar:{...ARB,...NUM},ru:{...RUS,...NUM},tr:{...LAT,...TUR,...NUM}};const cur=()=>TB[lang];
+const rev=()=>Object.fromEntries(Object.entries(cur()).map(([k,v])=>[v,k]));
+const norm=s=>s.replace(/[·•●]/g,'.').replace(/[−–—_▬]/g,'-');
+const t2m=s=>[...s.toUpperCase()].map(c=>c==' '||c=='\n'?'/':FW[c]||'?').join(' ').replace(/ \/ /g,' / ');
+const m2t=s=>{const r=rev();return norm(s).trim().split(/\s*\/\s*|\s{3,}/).map(w=>w.split(/\s+/).filter(Boolean).map(c=>r[c]||'?').join('')).join(' ')};
+const vis=c=>c.replace(/\./g,'●').replace(/-/g,'▬');
+function playMorse(code,u=.08){const c=AC();let t=c.currentTime+.1;
+ for(const ch of (code||'')){if(ch=='.'||ch=='-'){const o=c.createOscillator(),g=c.createGain(),d=ch=='.'?u:3*u;o.frequency.value=650;g.gain.setValueAtTime(.2,t);g.gain.setValueAtTime(0,t+d);o.connect(g).connect(c.destination);o.start(t);o.stop(t+d+.01);t+=d+u}
+ else t+=(ch=='/'?4:2)*u}}
+function grid(){const t=cur();$('mg').innerHTML=Object.entries(t).map(([k,v])=>`<button class="chip" data-c="${v}"><b>${k}</b><span>${vis(v)}</span></button>`).join('');
+ $('mg').querySelectorAll('.chip').forEach(b=>b.onclick=()=>playMorse(b.dataset.c))}
+$('lang').onchange=e=>{lang=e.target.value;grid();quiz();conv()};
+let qa='';
+function quiz(){const k=Object.keys(cur());qa=k[Math.random()*k.length|0];
+ const o=new Set([qa]);while(o.size<4)o.add(k[Math.random()*k.length|0]);
+ $('qc').textContent=vis(cur()[qa]);$('qo').innerHTML='';
+ [...o].sort(()=>Math.random()-.5).forEach(x=>{const b=document.createElement('button');b.textContent=x;
+  b.onclick=()=>{b.classList.add(x==qa?'ok':'no');setTimeout(quiz,700)};$('qo').append(b)})}
+$('qp').onclick=()=>playMorse(cur()[qa]);
+function conv(){const m=t2m($('t2m').value);$('t2mo').textContent=m;$('m2to').textContent=m2t($('m2t').value)}
+$('t2m').oninput=$('m2t').oninput=conv;
+$('pl').onclick=()=>playMorse($('t2mo').textContent);
+let inp='',tm,osc,t0;
+const upd=()=>{$('mi').textContent=inp.replace(/\./g,'·').replace(/-/g,'−');$('mo').textContent=m2t(inp)};
+const add=s=>{inp+=s;upd()};
+$('kd').onclick=()=>add('.');$('kh').onclick=()=>add('-');$('kl').onclick=()=>add(' ');$('kw').onclick=()=>add(' / ');
+$('kb').onclick=()=>{inp=inp.slice(0,-1);upd()};$('kc').onclick=()=>{inp='';upd()};
+const key=$('key');
+key.onpointerdown=e=>{e.preventDefault();clearTimeout(tm);t0=performance.now();const c=AC();osc=c.createOscillator();const g=c.createGain();g.gain.value=.2;osc.frequency.value=650;osc.connect(g).connect(c.destination);osc.start()};
+const rel=()=>{if(!osc)return;osc.stop();osc=null;add(performance.now()-t0<250?'.':'-');tm=setTimeout(()=>{if(!inp.endsWith(' '))add(' ')},700)};
+key.onpointerup=rel;key.onpointerleave=rel;key.onpointercancel=rel;
+
+/* ---------- Spectrogram ---------- */
+const FD={};"0:3E5149453E,1:00427F4000,2:4261514946,3:2141454B31,4:1814127F10,5:2745454539,6:3C4A494930,7:0171090503,8:3649494936,9:06494929 1E,A:7E1111117E,B:7F49494936,C:3E41414122,D:7F4141221C,E:7F49494941,F:7F09090901,G:3E4149497A,H:7F0808087F,I:00417F4100,J:2040413F01,K:7F08142241,L:7F40404040,M:7F020C027F,N:7F0408107F,O:3E4141413E,P:7F09090906,Q:3E4151215E,R:7F09192946,S:4649494931,T:01017F0101,U:3F4040403F,V:1F2040201F,W:3F4038403F,X:6314081463,Y:0708700807,Z:6151494543".replace(' ','').split(',').forEach(x=>{const[c,h]=x.split(':');FD[c]=h.match(/../g).map(v=>parseInt(v,16))});
+const SR=16000,SL=960,FQ=r=>3200-r*400;
+let cols=[];
+function enc(s){const o=[];for(const c of s.toUpperCase().slice(0,24)){const g=FD[c]||[0,0,0,0,0];o.push(...g,0)}return o}
+function dec(cs){const ks=Object.keys(FD);let out='';
+ for(let i=0;i+5<=cs.length;i+=6){const g=cs.slice(i,i+5);if(g.every(v=>!v)){out+=' ';continue}
+  let best='?',bd=99;for(const k of ks){let d=0;FD[k].forEach((v,j)=>{let x=v^g[j];while(x){d+=x&1;x>>=1}});if(d<bd){bd=d;best=k}}out+=best}
+ return out.trim()||'—'}
+function draw(cs){const cv=$('cv'),cell=10;cv.width=cs.length*cell;cv.height=7*cell;const x=cv.getContext('2d');x.fillStyle='#000';x.fillRect(0,0,cv.width,cv.height);
+ cs.forEach((v,i)=>{for(let r=0;r<7;r++)if(v>>r&1){x.fillStyle=`hsl(${200-r*28},90%,62%)`;x.fillRect(i*cell,r*cell,cell,cell)}})}
+function wav(cs){const n=cs.length*SL,f=new Float32Array(n);
+ cs.forEach((v,i)=>{for(let r=0;r<7;r++)if(v>>r&1){const w=2*Math.PI*FQ(r)/SR;for(let k=0;k<SL;k++){const t=i*SL+k,e=Math.min(1,k/40,(SL-k)/40);f[t]+=.12*e*Math.sin(w*t)}}});
+ const b=new DataView(new ArrayBuffer(44+n*2)),W=(o,s)=>[...s].forEach((c,j)=>b.setUint8(o+j,c.charCodeAt(0)));
+ W(0,'RIFF');b.setUint32(4,36+n*2,true);W(8,'WAVEfmt ');b.setUint32(16,16,true);b.setUint16(20,1,true);b.setUint16(22,1,true);b.setUint32(24,SR,true);b.setUint32(28,SR*2,true);b.setUint16(32,2,true);b.setUint16(34,16,true);W(36,'data');b.setUint32(40,n*2,true);
+ f.forEach((v,i)=>b.setInt16(44+i*2,Math.max(-1,Math.min(1,v))*32767,true));
+ return URL.createObjectURL(new Blob([b],{type:'audio/wav'}))}
+$('sg').onclick=()=>{cols=enc($('st').value);draw(cols);const u=wav(cols);$('au').src=u;$('dw').href=u;$('di').href=$('cv').toDataURL();$('so').textContent=''};
+function readCanvas(cv){const x=cv.getContext('2d'),w=cv.width,h=cv.height,cell=h/7,n=Math.round(w/cell),o=[];
+ for(let c=0;c<n;c++){let v=0;for(let r=0;r<7;r++){const p=x.getImageData(Math.min(w-1,(c+.5)*cell|0),(r+.5)*cell|0,1,1).data;if(Math.max(p[0],p[1],p[2])>130&&p[3]>0)v|=1<<r}o.push(v)}return o}
+$('sd').onclick=()=>{if(cols.length)$('so').textContent=dec(readCanvas($('cv')))};
+function gz(d,s,f){const k=2*Math.cos(2*Math.PI*f/SR);let a=0,b=0;for(let i=0;i<SL;i++){const c=d[s+i]+k*a-b;b=a;a=c}return a*a+b*b-k*a*b}
+$('sf').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('so').textContent='...';
+ try{if(f.type.startsWith('image')){const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=im.width;c.height=im.height;c.getContext('2d').drawImage(im,0,0);$('so').textContent=dec(readCanvas(c))};im.src=URL.createObjectURL(f)}
+ else{const c=new (window.AudioContext||window.webkitAudioContext)({sampleRate:SR});const a=await c.decodeAudioData(await f.arrayBuffer()),d=a.getChannelData(0),n=Math.floor(d.length/SL),P=[];
+  for(let i=0;i<n;i++)P.push([0,1,2,3,4,5,6].map(r=>gz(d,i*SL,FQ(r))));
+  const m=Math.max(...P.flat()),cs=P.map(p=>p.reduce((v,x,r)=>v|(x>m*.2?1<<r:0),0));$('so').textContent=dec(cs);draw(cs)}}
+ catch(err){$('so').textContent=trx('تعذّرت القراءة')}};
+$('sg').click();
+
+/* ---------- Ciphers ---------- */
+const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const shift=(s,k)=>s.replace(/[a-z]/gi,c=>{const b=c<'a'?65:97;return String.fromCharCode((c.charCodeAt(0)-b+k%26+26)%26+b)});
+const atb=s=>s.replace(/[a-z]/gi,c=>{const b=c<'a'?65:97;return String.fromCharCode(b+25-(c.charCodeAt(0)-b))});
+const vig=(s,key,d)=>{key=key.toUpperCase().replace(/[^A-Z]/g,'');if(!key)return'أدخل مفتاحًا لاتينيًا';let i=0;return s.replace(/[a-z]/gi,c=>shift(c,d*(key.charCodeAt(i++%key.length)-65)))};
+const pat=(n,l)=>{const r=[];let x=0,d=1;for(let i=0;i<l;i++){r.push(x);if(n>1){if(x==0)d=1;else if(x==n-1)d=-1;x+=d}}return r};
+const rail=(s,n,dc)=>{n=Math.max(2,n|0||3);const p=pat(n,s.length),ix=[...Array(s.length).keys()].sort((a,b)=>p[a]-p[b]||a-b);
+ if(!dc)return ix.map(i=>s[i]).join('');const o=[];ix.forEach((j,k)=>o[j]=s[k]);return o.join('')};
+const by=s=>[...new TextEncoder().encode(s)];const un=a=>new TextDecoder().decode(new Uint8Array(a));
+const C={
+caesar:{n:'شيفرة قيصر',p:'الإزاحة (رقم)',d:'استخدمها يوليوس قيصر: يُزاح كل حرف عددًا ثابتًا من الأماكن في الأبجدية. مثال بإزاحة 3: A تصبح D. ضعيفة جدًا لأن عدد المفاتيح 25 فقط ويسهل كسرها بالتجربة.',e:(s,k)=>shift(s,+k||3),x:(s,k)=>shift(s,-(+k||3))},
+rot13:{n:'ROT13',d:'قيصر بإزاحة 13 ثابتة؛ ولأن الأبجدية 26 حرفًا فالتشفير وفكه نفس العملية. تُستخدم لإخفاء حلول الألغاز لا للحماية.',e:s=>shift(s,13),x:s=>shift(s,13)},
+atbash:{n:'أتباش',d:'شيفرة عبرية قديمة تعكس الأبجدية: A↔Z وB↔Y وهكذا. لا مفتاح لها، وتشفيرها هو نفس فكها.',e:atb,x:atb},
+vig:{n:'فيجنير',p:'الكلمة المفتاحية (حروف لاتينية)',d:'تستخدم كلمة سرية تُكرَّر فوق النص، وكل حرف يُزاح بقدر حرف المفتاح المقابل. بقيت قرونًا تُسمّى الشيفرة التي لا تُكسر، لكن يكسرها تحليل التكرار (طريقة كاسيسكي).',e:(s,k)=>vig(s,k,1),x:(s,k)=>vig(s,k,-1)},
+rail:{n:'سياج السكك (Rail Fence)',p:'عدد الصفوف (رقم)',d:'شيفرة تبديل: يُكتب النص بشكل متعرج على عدة صفوف ثم تُقرأ الصفوف بالترتيب. لا تغيّر الحروف بل ترتيبها.',e:(s,k)=>rail(s,k),x:(s,k)=>rail(s,k,1)},
+b64:{n:'Base64',d:'ليس تشفيرًا سريًا بل ترميز يحوّل البيانات الثنائية إلى 64 رمزًا نصيًا لنقلها في البريد والويب. يدعم العربية. أي شخص يستطيع فكه.',e:s=>btoa(String.fromCharCode(...by(s))),x:s=>{try{return un([...atob(s.trim())].map(c=>c.charCodeAt(0)))}catch(e){return'نص Base64 غير صالح'}}},
+hex:{n:'سداسي عشري (Hex)',d:'يمثّل كل بايت برقمين بالنظام الستة عشري (0-9 وA-F). شائع في البرمجة وتحليل الملفات.',e:s=>by(s).map(b=>b.toString(16).padStart(2,'0')).join(' '),x:s=>{try{return un(s.trim().split(/[\s,]+/).map(h=>parseInt(h,16)))}catch(e){return'غير صالح'}}},
+bin:{n:'ثنائي (Binary)',d:'لغة الحاسوب الأصلية: كل بايت 8 خانات من 0 و1. مثال: الحرف A هو 01000001.',e:s=>by(s).map(b=>b.toString(2).padStart(8,'0')).join(' '),x:s=>{try{return un(s.trim().split(/\s+/).map(b=>parseInt(b,2)))}catch(e){return'غير صالح'}}},
+morse:{n:'مورس',d:'ترميز بنقاط وشرطات (تجده بالتفصيل في تبويب مورس).',e:s=>t2m(s),x:s=>m2t(s)}};
+const cs=$('cs');
+const sel=()=>{const v=C[cs.value];if(!v)return;$('cp').style.display=v.p?'block':'none';$('cp').placeholder=tr(v.p||'');$('cinf').textContent=tr(v.d)};
+cs.onchange=sel;
+const run=f=>{const v=C[cs.value];$('co').textContent=trx(v[f]($('ci').value,$('cp').value))};
+$('ce').onclick=()=>run('e');$('cd').onclick=()=>run('x');
+function buildC(){const v0=cs.value;cs.innerHTML='';Object.entries(C).forEach(([k,v])=>cs.add(new Option(tr(v.n),k)));if(v0)cs.value=v0;sel();
+$('cl').innerHTML=Object.values(C).map(v=>`<details><summary>${tr(v.n)}</summary><p>${tr(v.d)}</p><p class="mut" dir="ltr" style="text-align:left">${v.e('Hello',v.p?(v.p.includes('رقم')?3:'KEY'):'')}</p></details>`).join('')}
+
+grid();quiz();conv();upd();
+$('ul').onchange=e=>{L=e.target.value;try{localStorage.setItem('lg',L)}catch(x){}setLang()};setLang();
+</script>
+</body>
+</html>
